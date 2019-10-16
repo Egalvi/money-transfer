@@ -36,7 +36,9 @@ public class HashMapAccountService implements AccountService {
 
     @Override
     public void update(Account account) {
-        accountStorage.put(account.getId(), account);
+        synchronized (account) {
+            accountStorage.put(account.getId(), account);
+        }
     }
 
     @Override
@@ -46,6 +48,7 @@ public class HashMapAccountService implements AccountService {
 
     @Override
     public void transfer(Account from, Account to, BigDecimal amount) throws InsufficientFundException {
+        //TODO actually these are new account instances each time if using database
         if (from.hashCode() < to.hashCode()) {
             synchronized (from) {
                 synchronized (to) {
