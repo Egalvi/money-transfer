@@ -15,7 +15,7 @@ public interface AccountService {
 
     void update(Account account);
 
-    void delete(Account account);
+    void delete(int accountId);
 
     void transfer(Account from, Account to, BigDecimal amount) throws InsufficientFundException;
 

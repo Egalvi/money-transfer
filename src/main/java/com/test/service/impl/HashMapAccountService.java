@@ -11,6 +11,8 @@ import java.util.HashMap;
 
 public class HashMapAccountService implements AccountService {
 
+    public static HashMapAccountService INSTANCE = new HashMapAccountService();
+
     private Object equalsLog = new Object();
 
     private HashMap<Integer, Account> accountStorage = new HashMap<>();
@@ -38,8 +40,8 @@ public class HashMapAccountService implements AccountService {
     }
 
     @Override
-    public void delete(Account account) {
-        accountStorage.remove(account.getId());
+    public void delete(int id) {
+        accountStorage.remove(id);
     }
 
     @Override

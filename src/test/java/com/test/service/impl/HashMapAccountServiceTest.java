@@ -64,7 +64,7 @@ public class HashMapAccountServiceTest {
 
         assertEquals(1, accountService.list().size());
 
-        accountService.delete(account);
+        accountService.delete(account.getId());
 
         assertEquals(0, accountService.list().size());
     }
