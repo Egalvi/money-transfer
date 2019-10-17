@@ -13,7 +13,7 @@ public class HashMapAccountService implements AccountService {
 
     public static HashMapAccountService INSTANCE = new HashMapAccountService();
 
-    private Object equalsLog = new Object();
+    private Object equalsLock = new Object();
 
     private HashMap<Integer, Account> accountStorage = new HashMap<>();
 
@@ -48,7 +48,6 @@ public class HashMapAccountService implements AccountService {
 
     @Override
     public void transfer(Account from, Account to, BigDecimal amount) throws InsufficientFundException {
-        //TODO actually these are new account instances each time if using database
         if (from.hashCode() < to.hashCode()) {
             synchronized (from) {
                 synchronized (to) {
@@ -62,7 +61,7 @@ public class HashMapAccountService implements AccountService {
                 }
             }
         } else {
-            synchronized (equalsLog) {
+            synchronized (equalsLock) {
                 synchronized (to) {
                     synchronized (from) {
                         innerTransfer(from, to, amount);

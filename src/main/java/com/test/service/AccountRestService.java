@@ -1,7 +1,7 @@
 package com.test.service;
 
 import com.test.model.Account;
-import com.test.service.impl.HashMapAccountService;
+import com.test.service.impl.H2AccountService;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -11,7 +11,7 @@ import java.util.Collection;
 @Path("/account")
 public class AccountRestService {
     //TODO move to constructor arg
-    private AccountService accountService = HashMapAccountService.INSTANCE;
+    private AccountService accountService = H2AccountService.INSTANCE;
 
     @GET
     @Path("list")
@@ -53,6 +53,7 @@ public class AccountRestService {
                          @FormParam("toId") int toId,
                          @FormParam("amount") BigDecimal amount) throws InsufficientFundException {
         //TODO NPE
+        //TODO map exceptions
         accountService.transfer(accountService.get(fromId), accountService.get(toId), amount);
     }
 }
