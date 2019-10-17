@@ -1,10 +1,8 @@
 package com.test.service;
 
 import com.test.model.Account;
-import com.test.service.impl.H2AccountService;
 import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.math.BigDecimal;
