@@ -1,7 +1,10 @@
 package com.test.service;
 
 import com.test.model.Account;
+import com.test.service.impl.H2AccountService;
 import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -21,6 +24,17 @@ public class AccountRestServiceTest {
     public void tearDown() {
         try (Connection conn = DriverManager.getConnection("jdbc:h2:mem:accounts", "sa", "sa");
              PreparedStatement st = conn.prepareStatement("DELETE FROM ACCOUNT");
+        ) {
+            st.execute();
+        } catch (SQLException e) {
+            throw new AccountServiceException(e);
+        }
+    }
+
+    @AfterClass
+    public static void dropTable() {
+        try (Connection conn = DriverManager.getConnection("jdbc:h2:mem:accounts", "sa", "sa");
+             PreparedStatement st = conn.prepareStatement("DROP TABLE ACCOUNT");
         ) {
             st.execute();
         } catch (SQLException e) {
