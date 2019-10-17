@@ -4,9 +4,6 @@ import com.test.service.AccountRestService;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
-import org.h2.jdbcx.JdbcConnectionPool;
-
-import java.sql.*;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -31,19 +28,4 @@ public class App {
             jettyServer.destroy();
         }
     }
-
-//    public static void main(String[] args) throws Exception {
-//
-//        String connectionString = "jdbc:h2:mem:accounts;INIT=RUNSCRIPT FROM 'classpath:init.sql'";
-//        JdbcConnectionPool pool = JdbcConnectionPool.create(connectionString, "sa", "sa");
-//        try (Connection con = pool.getConnection();
-//             Statement stm = con.createStatement();
-//             ResultSet rs = stm.executeQuery("SELECT * from account")) {
-//
-//            while (rs.next()) {
-//                System.out.println(rs.getString(1) + ", " + rs.getString(2));
-//            }
-//
-//        }
-//    }
 }
