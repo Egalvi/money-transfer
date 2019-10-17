@@ -115,6 +115,7 @@ public class H2AccountService implements AccountService {
 
     @Override
     public void transfer(Account from, Account to, BigDecimal amount) throws InsufficientFundException {
+        if (from.getId() == to.getId()) return;
         if (from.hashCode() < to.hashCode()) {
             synchronized (from) {
                 synchronized (to) {
